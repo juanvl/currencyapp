@@ -12,7 +12,7 @@ services:
     depends_on:
       - db
     environment:
-      - API_BASE_URL=localhost
+      - API_BASE_URL=http://35.243.152.136
       - API_BASE_PORT=8000
       - HGBRASIL_API_URL=https://api.hgbrasil.com/finance/quotations?format=json&key=
       - HGBRASIL_API_KEY=ffbc7ead

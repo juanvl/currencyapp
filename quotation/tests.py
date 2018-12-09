@@ -153,7 +153,7 @@ class CurrencyQuotationViewSetTestCase(TestCase):
         self.cq.save()
 
     def test_create(self):
-        url = "https://api.hgbrasil.com/finance/quotations?format=json&key={}".format(settings.HG_BRASIL_API_KEY)
+        url = "{}{}".format(settings.HGBRASIL_API_URL, settings.HGBRASIL_API_KEY)
         try:
             response = requests.get(url)
             api_data = response.text
