@@ -16,7 +16,10 @@ class Command(BaseCommand):
         url = "http://localhost:8000/quotation/currencyquotations/create/"
         try:
             response = requests.post(url, data = {'api_data': api_data})
-            print(response.__dict__)
+            if response.status_code == 200:
+                print("Success retrieving currency api data")
+            else:
+                print("FAIL")
         except BaseException as error:
             print(response.__dict__)
             return str(error)

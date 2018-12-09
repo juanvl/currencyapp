@@ -4,6 +4,7 @@ from quotation.models import CurrencyQuotation
 
 class CurrencyQuotationSerializer(serializers.ModelSerializer):
     api_data = serializers.SerializerMethodField()
+    collected_at = serializers.SerializerMethodField()
 
     class Meta:
         model = CurrencyQuotation
@@ -11,14 +12,17 @@ class CurrencyQuotationSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_api_data(cq):
-        cq_api_data = cq.api_data
-
         cq_return = {
             "quotation_real": {
-                "bitcoin": cq_api_data["results"]["currencies"]["BTC"],
-                "euro": cq_api_data["results"]["currencies"]["EUR"],
-                "dollar": cq_api_data["results"]["currencies"]["USD"],
+                "bitcoin": cq.api_data["results"]["currencies"]["BTC"],
+                "euro": cq.api_data["results"]["currencies"]["EUR"],
+                "dollar": cq.api_data["results"]["currencies"]["USD"],
             }
         }
 
         return cq_return
+    
+    @staticmethod
+    def get_collected_at(cq):
+        formatedDate = cq.collected_at.strftime("%H:%M")
+        return formatedDate

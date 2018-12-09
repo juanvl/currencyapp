@@ -29,8 +29,11 @@ class CurrencyQuotationViewSet(ViewSet):
                         content_type='application/json')
 
     def list(self, request):
+        limit = request.GET.get('limit', None)
+        if limit:
+            limit = int(limit)
         try:
-            all_cq = CurrencyQuotation.objects.all()
+            all_cq = CurrencyQuotation.objects.all()[:limit]
             serializer = CurrencyQuotationSerializer(all_cq, many=True)
         except BaseException as error:
             return Response({
