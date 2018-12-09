@@ -1,2 +1,2 @@
 # currencyapp
-A web tool for viewing graphs of currency quotes
+API to get currency quotes information
