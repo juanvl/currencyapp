@@ -8,4 +8,4 @@ WORKDIR /code
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
 ADD . /code/
-ENTRYPOINT service cron start && python3 manage.py runserver 0.0.0.0:8000
+ENTRYPOINT env >> /etc/environment && service cron start && python3 manage.py runserver 0.0.0.0:8000
