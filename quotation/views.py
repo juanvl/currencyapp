@@ -33,7 +33,7 @@ class CurrencyQuotationViewSet(ViewSet):
         if limit:
             limit = int(limit)
         try:
-            all_cq = CurrencyQuotation.objects.all()[:limit]
+            all_cq = CurrencyQuotation.objects.all().order_by('-id')[:limit]
             serializer = CurrencyQuotationSerializer(all_cq, many=True)
         except BaseException as error:
             return Response({
