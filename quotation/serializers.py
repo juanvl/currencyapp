@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from quotation.models import CurrencyQuotation
+import pytz
 
 
 class CurrencyQuotationSerializer(serializers.ModelSerializer):
@@ -24,5 +25,7 @@ class CurrencyQuotationSerializer(serializers.ModelSerializer):
     
     @staticmethod
     def get_collected_at(cq):
-        formatedDate = cq.collected_at.strftime("%H:%M")
+        time_zone = pytz.timezone('America/Sao_Paulo')
+        date_time = time_zone.localize(cq.collected_at)
+        formatedDate = date_time.strftime("%H:%M")
         return formatedDate
